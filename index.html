@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎉</title>
+  <title>🎉 Doğum Günü</title>
+
   <style>
     :root{
       --bg1:#070A12;
@@ -13,7 +14,9 @@
       --text:#FFFFFF;
       --muted:rgba(255,255,255,.7);
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box }
+
     body{
       margin:0;
       min-height:100vh;
@@ -26,26 +29,35 @@
         radial-gradient(900px 600px at 80% 30%, rgba(185,131,255,.16), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       overflow:hidden;
+      cursor:pointer;
     }
 
-    /* Yumuşak kayan parıltı */
+    /* Aurora efekti */
     .aurora{
-      position:absolute; inset:-40%;
-      background: conic-gradient(from 180deg, rgba(124,247,255,.20), rgba(185,131,255,.18), rgba(255,180,120,.10), rgba(124,247,255,.20));
+      position:absolute;
+      inset:-40%;
+      background: conic-gradient(
+        from 180deg,
+        rgba(124,247,255,.20),
+        rgba(185,131,255,.18),
+        rgba(255,180,120,.10),
+        rgba(124,247,255,.20)
+      );
       filter: blur(60px);
       animation: drift 10s ease-in-out infinite alternate;
       opacity:.7;
       pointer-events:none;
     }
+
     @keyframes drift{
-      from{ transform: translate3d(-2%, -2%, 0) rotate(-6deg) }
-      to  { transform: translate3d( 2%,  2%, 0) rotate( 6deg) }
+      from{ transform: translate(-2%, -2%) rotate(-6deg); }
+      to  { transform: translate( 2%,  2%) rotate( 6deg); }
     }
 
     .card{
       position:relative;
       width:min(900px, 92vw);
-      padding: clamp(20px, 3vw, 34px);
+      padding: clamp(20px, 3vw, 36px);
       border-radius: 22px;
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.12);
@@ -54,21 +66,21 @@
         0 0 40px rgba(124,247,255,.10);
       backdrop-filter: blur(10px);
       text-align:center;
+      animation: pop .7s ease-out both;
+    }
+
+    @keyframes pop{
+      from{ transform: translateY(12px) scale(.97); opacity:0 }
+      to  { transform: translateY(0) scale(1); opacity:1 }
     }
 
     h1{
-      margin:0 0 10px;
+      margin:0 0 12px;
       font-size: clamp(28px, 4vw, 56px);
-      line-height:1.12;
-      letter-spacing:.2px;
+      line-height:1.1;
       text-shadow:
         0 0 18px rgba(124,247,255,.22),
         0 0 22px rgba(185,131,255,.18);
-      animation: pop .7s ease-out both;
-    }
-    @keyframes pop{
-      from{ transform: translateY(10px) scale(.98); opacity:0 }
-      to  { transform: translateY(0)   scale(1);    opacity:1 }
     }
 
     .sub{
@@ -78,12 +90,13 @@
     }
 
     .badges{
-      margin-top:16px;
+      margin-top:18px;
       display:flex;
       gap:10px;
       justify-content:center;
       flex-wrap:wrap;
     }
+
     .badge{
       padding:10px 14px;
       border-radius:999px;
@@ -92,28 +105,17 @@
       font-size: 14px;
     }
 
-    /* Hafif konfeti noktaları */
-    .dots{
-      position:absolute; inset:0;
-      background-image:
-        radial-gradient(circle at 15% 25%, rgba(124,247,255,.35) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 18%, rgba(185,131,255,.30) 0 2px, transparent 3px),
-        radial-gradient(circle at 85% 70%, rgba(255,190,120,.28) 0 2px, transparent 3px),
-        radial-gradient(circle at 25% 80%, rgba(180,255,200,.22) 0 2px, transparent 3px);
-      opacity:.35;
-      pointer-events:none;
-    }
-
-    .footer{
+    .hint{
       margin-top:14px;
-      font-size:13px;
-      color: rgba(255,255,255,.55);
+      font-size:12px;
+      color:rgba(255,255,255,.5);
     }
   </style>
 </head>
+
 <body>
+
   <div class="aurora"></div>
-  <div class="dots"></div>
 
   <main class="card">
     <h1>Doğum günün kutlu olsun Onur Komutanımm 🎂🎉</h1>
@@ -125,16 +127,20 @@
       <div class="badge">🫡 Komutanım sağ olsun</div>
     </div>
 
-    <div class="footer">— Semih</div>
+    <div class="hint">🔊 Sayfaya bir kez tıkla</div>
   </main>
+
+  <!-- MÜZİK -->
+  <audio id="music" src="music.mp3" preload="auto"></audio>
+
+  <script>
+    const music = document.getElementById("music");
+
+    document.body.addEventListener("click", () => {
+      music.volume = 0.5;
+      music.play().catch(() => {});
+    }, { once: true });
+  </script>
+
 </body>
 </html>
-<audio id="music" src="music.mp3"></audio>
-
-<script>
-  document.body.addEventListener("click", () => {
-    const music = document.getElementById("music");
-    music.volume = 0.5;
-    music.play();
-  }, { once: true });
-</script>
